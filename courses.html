@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .table {
+        min-width: 800px;
+      }
+
+      .table-row {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+      }
+
+      .period-box {
+        display: grid;
+        grid-template-rows: repeat(3, 1fr);
+      }
+
+      .table-cell {
+        border: 1px solid gray;
+      }
+
+      .period-cell {
+        border: 1px solid gray;
+        min-height: 30rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="table">
+      <div class="table-header">
+        <div class="table-row">
+          <div class="table-cell"></div>
+          <div class="table-cell"></div>
+          <div class="table-cell">
+            月
+          </div>
+          <div class="table-cell">
+            火
+          </div>
+          <div class="table-cell">
+            水
+          </div>
+          <div class="table-cell">
+            木
+          </div>
+          <div class="table-cell">
+            金
+          </div>
+        </div>
+      </div>
+      <div class="table-body">
+        <div class="table-row">
+          <div class="table-cell">
+            1限
+          </div>
+          <div class="table-cell">
+            <div class="period-box">
+              <div class="period-cell">
+                科目
+              </div>
+              <div class="period-cell">
+                先生
+              </div>
+              <div class="period-cell">
+                教室
+              </div>
+            </div>
+          </div>
+          <div class="table-cell">
+            <div class="period-box">
+              <div class="period-cell">
+                Web デザイン I
+              </div>
+              <div class="period-cell">
+                岩本
+              </div>
+              <div class="period-cell">
+                43
+              </div>
+            </div>
+          </div>
+          <div class="table-cell">
+            <div class="period-box">
+              <div class="period-cell">
+                英語 I
+              </div>
+              <div class="period-cell">
+                トベ　サラミ
+              </div>
+              <div class="period-cell">
+                21
+              </div>
+            </div>
+          </div>
+          <div class="table-cell">
+            <div class="period-box">
+              <div class="period-cell">
+                ネットワーク I
+              </div>
+              <div class="period-cell">
+                深田
+              </div>
+              <div class="period-cell">
+                24
+              </div>
+            </div>
+          </div>
+          <div class="table-cell">
+            <div class="period-box">
+              <div class="period-cell">
+                ビジネス日本語練習 I
+              </div>
+              <div class="period-cell">
+                吉田
+              </div>
+              <div class="period-cell">
+                21
+              </div>
+            </div>
+          </div>
+          <div class="table-cell">
+            <div class="period-box">
+              <div class="period-cell">
+                プログラミング I
+              </div>
+              <div class="period-cell">
+                根岸
+              </div>
+              <div class="period-cell">
+                61
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-cell">
+            2限
+          </div>
+          <div class="table-cell">
+            <div class="period-box">
+              <div class="period-cell">
+                科目
+              </div>
+              <div class="period-cell">
+                先生
+              </div>
+              <div class="period-cell">
+                教室
+              </div>
+            </div>
+          </div>
+          <div class="table-cell">
+            <div class="period-box">
+              <div class="period-cell">
+                Web デザイン I
+              </div>
+              <div class="period-cell">
+                岩本
+              </div>
+              <div class="period-cell">
+                43
+              </div>
+            </div>
+          </div>
+          <div class="table-cell">
+            <div class="period-box">
+              <div class="period-cell">
+                ビジネスソフト I A (Excel)
+              </div>
+              <div class="period-cell">
+                森（烈）
+              </div>
+              <div class="period-cell">
+                61
+              </div>
+            </div>
+          </div>
+          <div class="table-cell">
+            <div class="period-box">
+              <div class="period-cell">
+                ビジネスソフト I B (Word)
+              </div>
+              <div class="period-cell">
+                伊藤
+              </div>
+              <div class="period-cell">
+                24
+              </div>
+            </div>
+          </div>
+          <div class="table-cell">
+            <div class="period-box">
+              <div class="period-cell">
+                コンピューターシステム I
+              </div>
+              <div class="period-cell">
+                山崎
+              </div>
+              <div class="period-cell">
+                31
+              </div>
+            </div>
+          </div>
+          <div class="table-cell">
+            <div class="period-box">
+              <div class="period-cell">
+                プログラミング I
+              </div>
+              <div class="period-cell">
+                根岸
+              </div>
+              <div class="period-cell">
+                61
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-cell">
+            3限
+          </div>
+          <div class="table-cell">
+            <div class="period-box">
+              <div class="period-cell">
+                科目
+              </div>
+              <div class="period-cell">
+                先生
+              </div>
+              <div class="period-cell">
+                教室
+              </div>
+            </div>
+          </div>
+          <div class="table-cell">
+            <div class="period-box">
+              <div class="period-cell">
+                ビジネス日本語 I
+              </div>
+              <div class="period-cell">
+                澤田
+              </div>
+              <div class="period-cell">
+                41
+              </div>
+            </div>
+          </div>
+          <div class="table-cell">
+            <div class="period-box">
+              <div class="period-cell">
+                ビジネス基礎 I
+              </div>
+              <div class="period-cell">
+                森（大）
+              </div>
+              <div class="period-cell">
+                21
+              </div>
+            </div>
+          </div>
+          <div class="table-cell">
+            <div class="period-box">
+              <div class="period-cell">
+                12:35~13:00 HR
+              </div>
+              <div class="period-cell">
+                担任
+              </div>
+              <div class="period-cell">
+                24
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
