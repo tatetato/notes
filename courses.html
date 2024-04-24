@@ -359,21 +359,25 @@
 
           let today = (new Date()).getDay()
 
-          if(weekday === weekdays[today]) {
+          if (weekday === weekdays[today]) {
             $weekday.addClass('highlight')
           }
 
           return $weekday
         }
 
-        weekdays.forEach(function(label) {
+        weekdays.forEach(function (label) {
           let $weekday = createWeekday(label)
 
 
           $('#weekdayContainer').append($weekday)
         })
 
-        $('$weekdayContainer').children().unwrap()
+        setTimeout(() => {
+          // wait for all the weekdays
+          // how to resolve this async problem in jquery
+          $('$weekdayContainer').children().unwrap()
+        });
       }
     )
   </script>
