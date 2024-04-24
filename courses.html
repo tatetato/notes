@@ -9,6 +9,7 @@
   <style>
     .table {
       min-width: 800px;
+ 
     }
 
     .table-row {
@@ -34,6 +35,7 @@
       display: grid;
       grid-template-rows: repeat(auto-fill, 1fr);
       text-align: center;
+      
     }
 
     .time-cell {
@@ -48,7 +50,19 @@
     }
 
     .highlight {
-      background-color: greenyellow;
+      background-color: rgb(255, 241, 116);
+    }
+
+    .text-center {
+        text-align: center;
+    }
+    .py-1 {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+    .py-2 {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
     }
   </style>
 </head>
@@ -59,8 +73,8 @@
       <div class="table-row">
         <div class="table-cell"></div>
         <div class="table-cell"></div>
-        <!-- <div id="weekdayContainer"></div> -->
-        <div class="table-cell">
+        <div id="weekdayContainer"></div>
+        <!-- <div class="table-cell">
           月
         </div>
         <div class="table-cell">
@@ -74,13 +88,14 @@
         </div>
         <div class="table-cell">
           金
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="table-body">
       <div class="table-row">
         <div class="table-cell">
-          <div class="time-box">
+            <div id="time-box-1"></div>
+          <!-- <div class="time-box">
             <div class="time-cell">
               1限
             </div>
@@ -93,7 +108,7 @@
             <div class="time-cell">
               10:50
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="table-cell">
           <div class="period-box ">
@@ -178,7 +193,9 @@
       </div>
       <div class="table-row">
         <div class="table-cell">
-          <div class="time-box">
+            <div id="time-box-2"></div>
+
+          <!-- <div class="time-box">
             <div class="time-cell">
               2限
             </div>
@@ -191,7 +208,7 @@
             <div class="time-cell">
               12:35
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="table-cell">
           <div class="period-box">
@@ -274,7 +291,9 @@
       </div>
       <div class="table-row">
         <div class="table-cell">
-          <div class="time-box">
+            <div id="time-box-3"></div>
+
+          <!-- <div class="time-box">
             <div class="time-cell">
               3限
             </div>
@@ -287,7 +306,7 @@
             <div class="time-cell">
               14:55
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="table-cell">
           <div class="period-box">
@@ -348,14 +367,14 @@
   <!-- https://releases.jquery.com/ -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  <!-- <script>
+  <script>
     $(document).ready(
       function () {
 
         let weekdays = ['日', '月', '火', '水', '木', '金', '土']
 
         function createWeekday(weekday) {
-          let $weekday = $('div').text(weekday).addClass('table-cell')
+          let $weekday = $('<div></div>').text(weekday).addClass(['table-cell', 'text-center', 'py-1'])
 
           let today = (new Date()).getDay()
 
@@ -366,19 +385,93 @@
           return $weekday
         }
 
-        weekdays.slice(1, 6).forEach(function (label) {
+        $.each(
+            weekdays.slice(1, 6),
+            function (index, label) {
           let $weekday = createWeekday(label)
           $('#weekdayContainer').append($weekday)
-        })
+        }
+        )
+
+        let courseTimeObjects = [
+                
+                {
+                    index: 0,
+                    startTime: '9:20',
+                    endTime: '10:50'
+                },
+                {
+                    index: 1,
+                    startTime: '11:05',
+                    endTime: '12:35'
+                },
+                {
+                    index: 2,
+                    startTime: '13:25',
+                    endTime: '14:55'
+                }
+            
+            ]
+
+            function isCurrentTimeBetween(timeObject) {
+  const currentTime = new Date();
+  const startTime = new Date();
+  const endTime = new Date();
+
+  const [startHours, startMinutes] = timeObject.startTime.split(':');
+  startTime.setHours(startHours);
+  startTime.setMinutes(startMinutes);
+
+  const [endHours, endMinutes] = timeObject.endTime.split(':');
+  endTime.setHours(endHours);
+  endTime.setMinutes(endMinutes);
+
+  return currentTime > startTime && currentTime < endTime;
+}
+
+        function createCourseTime(time) {
+            let $courseTime = $(` 
+            <div class="time-box">
+            <div class="time-cell">
+              ${time.index + 1}限
+            </div>
+            <div class="time-cell">
+              ${time.startTime}
+            </div>
+            <div class="time-cell">
+              ~
+            </div>
+            <div class="time-cell">
+                ${time.endTime}
+            </div>
+            </div>`)
+
+            return $courseTime
+        }
+
+        $.each(
+            courseTimeObjects,
+            function (index, time) {
+          let $courseTime = createCourseTime(time)
+          $(`#time-box-${time.index + 1}`).append($courseTime)
+          $(`#time-box-${time.index + 1}`).children().unwrap()
+
+          
+          if(isCurrentTimeBetween(time)) {
+                $courseTime.parent().addClass('highlight')
+            }
+        }
+        )
+
 
         setTimeout(() => {
           // wait for all the weekdays
           // how to resolve this async problem in jquery
-          // $('#weekdayContainer').children().unwrap()
-        }, 500);
+          $('#weekdayContainer').children().unwrap()
+        });
       }
     )
-  </script> -->
+  </script>
 </body>
 
 </html>
