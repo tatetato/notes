@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Document</title>
+  <title>Curriculum</title>
   <style>
     .table {
       min-width: 800px;
@@ -46,6 +46,10 @@
       color: rgb(53, 15, 124);
       font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     }
+
+    .highlight {
+      background-color: greenyellow;
+    }
   </style>
 </head>
 
@@ -55,7 +59,8 @@
       <div class="table-row">
         <div class="table-cell"></div>
         <div class="table-cell"></div>
-        <div class="table-cell">
+        <div id="weekdayContainer"></div>
+        <!-- <div class="table-cell">
           月
         </div>
         <div class="table-cell">
@@ -69,7 +74,7 @@
         </div>
         <div class="table-cell">
           金
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="table-body">
@@ -140,6 +145,8 @@
             <div class="period-cell floor-number">
               24
             </div>
+            <!-- classroom で出席確認必要
+            教科書の point は試験の時出るかもしれません -->
           </div>
         </div>
         <div class="table-cell">
@@ -337,6 +344,39 @@
       </div>
     </div>
   </div>
+
+  <script>
+    $(document).ready(
+      function () {
+
+        let weekdays = ['日', '月', '火', '水', '木', '金', '土']
+
+        function createWeekday(weekday) {
+          let $weekday = $('div').text(weekday).addClass('table-cell')
+
+          let today = (new Date()).getDay()
+
+          if(weekday === weekdays[today]) {
+            $weekday.addClass('highlight')
+          }
+
+          return $weekday
+        }
+
+        weekdays.forEach(function(label) {
+          let $weekday = createWeekday(label)
+
+
+          $('#weekdayContainer').append($weekday)
+        })
+
+        $('$weekdayContainer').children().unwrap()
+      }
+    )
+  </script>
+  <!-- https://releases.jquery.com/ -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </body>
 
 </html>
