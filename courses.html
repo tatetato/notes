@@ -366,7 +366,7 @@
           return $weekday
         }
 
-        weekdays.forEach(function (label) {
+        weekdays.slice(1, 5).forEach(function (label) {
           let $weekday = createWeekday(label)
 
 
@@ -377,7 +377,7 @@
           // wait for all the weekdays
           // how to resolve this async problem in jquery
           $('#weekdayContainer').children().unwrap()
-        }, 3000);
+        }, 500);
       }
     )
   </script>
