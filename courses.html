@@ -112,8 +112,7 @@
     </div>
     <div class="table-body">
       <div class="table-row">
-        <div class="table-cell">
-          <div id="time-box-1"></div>
+        <div class="table-cell" id="time-box-1">
           <!-- <div class="time-box">
             <div class="time-cell">
               1限
@@ -211,8 +210,8 @@
         </div>
       </div>
       <div class="table-row">
-        <div class="table-cell">
-          <div id="time-box-2"></div>
+        <div class="table-cell" id="time-box-2">
+
 
           <!-- <div class="time-box">
             <div class="time-cell">
@@ -309,8 +308,8 @@
         </div>
       </div>
       <div class="table-row">
-        <div class="table-cell">
-          <div id="time-box-3"></div>
+        <div class="table-cell" id="time-box-3">
+
 
           <!-- <div class="time-box">
             <div class="time-cell">
@@ -488,16 +487,22 @@
           function (index, time) {
             let $courseTime = createCourseTime(time)
             $(`#time-box-${time.index + 1}`).append($courseTime)
-            $(`#time-box-${time.index + 1}`).children().unwrap()
+          }
+        )
 
+        $.each(
+          courseTimeObjects,
+          function (index, time) {
             const compared = compareWithCurrentTime(time)
 
             if (compared.result) {
-              $courseTime.parent().addClass('highlight').addClass('relative')
+              let $timeBox = $(`#time-box-${time.index + 1}`)
+
+              $timeBox.addClass('highlight').addClass('relative')
 
               let $indicator = $("<div class='indicator'></div>")
                 .css('top', `${compared.deltaStartPercent}%`)
-              $courseTime.parent().append($indicator)
+              $timeBox.append($indicator)
             }
           }
         )
@@ -506,18 +511,16 @@
           $.each(
             courseTimeObjects,
             function (index, time) {
-              let $courseTime = createCourseTime(time)
-              $(`#time-box-${time.index + 1}`).append($courseTime)
-              $(`#time-box-${time.index + 1}`).children().unwrap()
-
               const compared = compareWithCurrentTime(time)
 
               if (compared.result) {
-                $courseTime.parent().addClass('highlight').addClass('relative')
+                let $timeBox = $(`#time-box-${time.index + 1}`)
+
+                $timeBox.addClass('highlight').addClass('relative')
 
                 let $indicator = $("<div class='indicator'></div>")
                   .css('top', `${compared.deltaStartPercent}%`)
-                $courseTime.parent().append($indicator)
+                $timeBox.append($indicator)
               }
             }
           )
