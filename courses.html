@@ -412,6 +412,14 @@
           }
         )
 
+
+
+        setTimeout(() => {
+          // wait for all the weekdays
+          // how to resolve this async problem in jquery
+          $('#weekdayContainer').children().unwrap()
+        });
+
         let courseTimeObjects = [
 
           {
@@ -494,12 +502,26 @@
           }
         )
 
+        $(window).on('focus', function () {
+          $.each(
+            courseTimeObjects,
+            function (index, time) {
+              let $courseTime = createCourseTime(time)
+              $(`#time-box-${time.index + 1}`).append($courseTime)
+              $(`#time-box-${time.index + 1}`).children().unwrap()
 
-        setTimeout(() => {
-          // wait for all the weekdays
-          // how to resolve this async problem in jquery
-          $('#weekdayContainer').children().unwrap()
-        });
+              const compared = compareWithCurrentTime(time)
+
+              if (compared.result) {
+                $courseTime.parent().addClass('highlight').addClass('relative')
+
+                let $indicator = $("<div class='indicator'></div>")
+                  .css('top', `${compared.deltaStartPercent}%`)
+                $courseTime.parent().append($indicator)
+              }
+            }
+          )
+        })
       }
     )
   </script>
