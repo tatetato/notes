@@ -65,7 +65,7 @@
         height: 6px;
         background-color: rgba(255, 0, 0, 0.526);
         position: absolute;
-        width: 100vw;
+        width: 100vw; /* not working on android firefox */
         top: 0;
         transition: all ease 0.3s;
       }
@@ -455,6 +455,20 @@
               $timeBox.append($indicator);
             }
           });
+        });
+
+        // Function to update the width of the indicator
+        function updateIndicatorWidth() {
+          let windowWidth = $(window).width(); // Get the width of the viewport
+          $(".indicator").css("width", windowWidth); // Set the width of the indicator to match the viewport width
+        }
+
+        // Call the function initially to set the width of the indicator
+        updateIndicatorWidth();
+
+        // Call the function whenever the window is resized to update the width of the indicator
+        $(window).on("resize", function() {
+          updateIndicatorWidth();
         });
       });
     </script>
