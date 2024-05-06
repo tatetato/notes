@@ -460,10 +460,10 @@
           });
         });
 
-        // Function to update the width of the indicator
+        // Function to update the width of the indicator to match the width of the .table div
         function updateIndicatorWidth() {
-          let windowWidth = $(window).width(); // Get the width of the viewport
-          $(".indicator").css("width", windowWidth); // Set the width of the indicator to match the viewport width
+          let tableWidth = $(".table").width(); // Get the width of the .table div
+          $(".indicator").css("width", tableWidth); // Set the width of the indicator to match the .table div width
         }
 
         // Call the function initially to set the width of the indicator
