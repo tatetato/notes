@@ -70,8 +70,8 @@
     }
 
     .indicator {
-      height: 6px;
-      background-color: rgba(255, 0, 0, 0.526);
+      height: 2px;
+      background-color:  rgba(255, 24, 24, 0.856);
       position: absolute;
 
       /*   not working on android firefox */
@@ -81,12 +81,13 @@
       transition: all ease 0.3s;
     }
 
-    .indicator::after {
-      content: "今ここ";
-      font-size: 14px;
-      color: rgb(15, 90, 252);
-      transform: translateY(-50%);
+    .indicator-text {
       position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      color: rgb(6, 179, 57);
     }
 
     .text-center {
@@ -310,6 +311,9 @@
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
   <script>
     $(document).ready(function () {
+
+
+
       function createPeriodHeader(time) {
         let $periodHeader = $(` 
           <div class="period-box ">
@@ -333,24 +337,66 @@
         $(item).append($periodHeader);
       });
 
-      let weekdays = ["日", "月", "火", "水", "木", "金", "土"];
+      // let weekdays = ["日", "月", "火", "水", "木", "金", "土"];
+
+      let courses = [
+  {
+    id: 0,
+    subject: "Web デザイン I",
+    teacher: "岩本",
+    classroom: "43"
+  },
+  {
+    id: 1,
+    subject: "英語 I",
+    teacher: "トベ　サラミ",
+    classroom: "21"
+  },]
+
+  let periods = [
+  {
+    id: 0,
+    startTime: "9:20",
+    endTime: "10:50"
+  },
+  {
+    id: 1,
+    startTime: "11:05",
+    endTime: "12:35"
+  },
+  {
+    id: 2,
+    startTime: "13:25",
+    endTime: "14:55"
+  },]
+
+let weekdays = [
+  { id: 0, japanese: "日", english: "Sunday" },
+  { id: 1, japanese: "月", english: "Monday" },
+  { id: 2, japanese: "火", english: "Tuesday" },
+  { id: 3, japanese: "水", english: "Wednesday" },
+  { id: 4, japanese: "木", english: "Thursday" },
+  { id: 5, japanese: "金", english: "Friday" },
+  { id: 6, japanese: "土", english: "Saturday" }
+];
+
 
       function createWeekday(weekday) {
         let $weekday = $("<div></div>")
-          .text(weekday)
+          .text(weekday.japanese)
           .addClass(["table-cell", "text-center", "py-1"]);
 
         let today = new Date().getDay();
 
-        if (weekday === weekdays[today]) {
+        if (weekday.japanese === weekdays[today].japanese) {
           $weekday.addClass("highlight");
         }
 
         return $weekday;
       }
 
-      $.each(weekdays.slice(1, 6), function (index, label) {
-        let $weekday = createWeekday(label);
+      $.each(weekdays.slice(1, 6), function (index, weekday) {
+        let $weekday = createWeekday(weekday);
         $("#weekdayContainer").append($weekday);
       });
 
@@ -437,11 +483,14 @@
 
           $timeBox.addClass("highlight").addClass("relative");
 
-          let $indicator = $("<div class='indicator'></div>").css(
+          let nowHours = (new Date()).getHours() 
+          let nowMinutes = (new Date()).getMinutes();
+          let $indicator = $(`<div class='indicator'><div class="indicator-text">${nowHours}:${nowMinutes}</div></div>`).css(
             "top",
             `${compared.deltaStartPercent}%`
           );
           $timeBox.append($indicator);
+          updateIndicatorWidth();
         }
       });
 
@@ -456,19 +505,14 @@
           if (compared.result) {
             $timeBox.addClass("highlight").addClass("relative");
 
-
-
-            let $indicator = $("<div class='indicator'></div>").css(
-              "top",
-              `${compared.deltaStartPercent}%`
-            );
-
-            // Remove any existing indicator
-            $(".indicator").remove();
-
-            $timeBox.append($indicator);
-            updateIndicatorWidth();
-
+            let nowHours = (new Date()).getHours() 
+          let nowMinutes = (new Date()).getMinutes();
+          let $indicator = $(`<div class='indicator'><div class="indicator-text">${nowHours}:${nowMinutes}</div></div>`).css(
+            "top",
+            `${compared.deltaStartPercent}%`
+          );
+          $timeBox.append($indicator);
+          updateIndicatorWidth();
           }
         });
       });
