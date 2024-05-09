@@ -6,17 +6,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Curriculum</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap" rel="stylesheet">
   <style>
     html {
       width: 100vw;
       overflow-x: hidden;
     }
-    
+
     .teacher-name {
-       font-family: "Yuji Syuku", serif;
+      font-family: "Yuji Syuku", serif;
     }
 
     .table {
@@ -71,7 +71,7 @@
 
     .indicator {
       height: 2px;
-      background-color:  rgba(255, 24, 24, 0.856);
+      background-color: rgba(255, 24, 24, 0.856);
       position: absolute;
 
       /*   not working on android firefox */
@@ -340,45 +340,45 @@
       // let weekdays = ["日", "月", "火", "水", "木", "金", "土"];
 
       let courses = [
-  {
-    id: 0,
-    subject: "Web デザイン I",
-    teacher: "岩本",
-    classroom: "43"
-  },
-  {
-    id: 1,
-    subject: "英語 I",
-    teacher: "トベ　サラミ",
-    classroom: "21"
-  },]
+        {
+          id: 0,
+          subject: "Web デザイン I",
+          teacher: "岩本",
+          classroom: "43"
+        },
+        {
+          id: 1,
+          subject: "英語 I",
+          teacher: "トベ　サラミ",
+          classroom: "21"
+        },]
 
-  let periods = [
-  {
-    id: 0,
-    startTime: "9:20",
-    endTime: "10:50"
-  },
-  {
-    id: 1,
-    startTime: "11:05",
-    endTime: "12:35"
-  },
-  {
-    id: 2,
-    startTime: "13:25",
-    endTime: "14:55"
-  },]
+      let periods = [
+        {
+          id: 0,
+          startTime: "9:20",
+          endTime: "10:50"
+        },
+        {
+          id: 1,
+          startTime: "11:05",
+          endTime: "12:35"
+        },
+        {
+          id: 2,
+          startTime: "13:25",
+          endTime: "14:55"
+        },]
 
-let weekdays = [
-  { id: 0, japanese: "日", english: "Sunday" },
-  { id: 1, japanese: "月", english: "Monday" },
-  { id: 2, japanese: "火", english: "Tuesday" },
-  { id: 3, japanese: "水", english: "Wednesday" },
-  { id: 4, japanese: "木", english: "Thursday" },
-  { id: 5, japanese: "金", english: "Friday" },
-  { id: 6, japanese: "土", english: "Saturday" }
-];
+      let weekdays = [
+        { id: 0, japanese: "日", english: "Sunday" },
+        { id: 1, japanese: "月", english: "Monday" },
+        { id: 2, japanese: "火", english: "Tuesday" },
+        { id: 3, japanese: "水", english: "Wednesday" },
+        { id: 4, japanese: "木", english: "Thursday" },
+        { id: 5, japanese: "金", english: "Friday" },
+        { id: 6, japanese: "土", english: "Saturday" }
+      ];
 
 
       function createWeekday(weekday) {
@@ -470,50 +470,37 @@ let weekdays = [
         return $courseTime;
       }
 
-      $.each(courseTimeObjects, function (index, time) {
-        let $courseTime = createCourseTime(time);
-        $(`#time-box-${time.index + 1}`).append($courseTime);
-      });
-
-      $.each(courseTimeObjects, function (index, time) {
+      const renderCourseTime = (time, $timeBox) => {
+        let oldIndicator = $timeBox.find('.indicator')
+        if (oldIndicator.length) {
+          oldIndicator.remove()
+        }
         const compared = compareWithCurrentTime(time);
-
         if (compared.result) {
-          let $timeBox = $(`#time-box-${time.index + 1}`);
-
           $timeBox.addClass("highlight").addClass("relative");
-
-          let nowHours = (new Date()).getHours() 
-          let nowMinutes = (new Date()).getMinutes();
-          let $indicator = $(`<div class='indicator'><div class="indicator-text">${nowHours}:${nowMinutes}</div></div>`).css(
-            "top",
-            `${compared.deltaStartPercent}%`
-          );
+          const nowHours = new Date().getHours();
+          const nowMinutes = new Date().getMinutes();
+          const $indicator = $(`<div class='indicator'><div class="indicator-text">${nowHours}:${nowMinutes}</div></div>`).css("top", `${compared.deltaStartPercent}%`);
           $timeBox.append($indicator);
           updateIndicatorWidth();
         }
+      };
+
+      $.each(courseTimeObjects, (index, time) => {
+        const $courseTime = createCourseTime(time);
+        $(`#time-box-${time.index + 1}`).append($courseTime);
       });
 
-      $(window).on("focus", function () {
-        $.each(courseTimeObjects, function (index, time) {
-          let $timeBox = $(`#time-box-${time.index + 1}`);
+      $.each(courseTimeObjects, (index, time) => {
+        const $timeBox = $(`#time-box-${time.index + 1}`);
+        renderCourseTime(time, $timeBox);
+      });
+
+      $(window).on("focus", () => {
+        $.each(courseTimeObjects, (index, time) => {
+          const $timeBox = $(`#time-box-${time.index + 1}`);
           $timeBox.removeClass("highlight");
-          // $timeBox.children().remove("indicator");
-
-          const compared = compareWithCurrentTime(time);
-
-          if (compared.result) {
-            $timeBox.addClass("highlight").addClass("relative");
-
-            let nowHours = (new Date()).getHours() 
-          let nowMinutes = (new Date()).getMinutes();
-          let $indicator = $(`<div class='indicator'><div class="indicator-text">${nowHours}:${nowMinutes}</div></div>`).css(
-            "top",
-            `${compared.deltaStartPercent}%`
-          );
-          $timeBox.append($indicator);
-          updateIndicatorWidth();
-          }
+          renderCourseTime(time, $timeBox);
         });
       });
 
