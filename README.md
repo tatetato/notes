@@ -1,5 +1,8 @@
 # notes
 
+https://dribbble.com/shots/18477642-UI-Anime-Website-Design
+card like border/frame, shadow effect
+
 https://dribbble.com/shots/20929623-Anime-character-generation-platform
 character generate
 
