@@ -1,5 +1,8 @@
 # notes
 
+https://dribbble.com/shots/20929623-Anime-character-generation-platform
+character generate
+
 https://www.youtube.com/watch?v=6CKW7tLv5e0
 scartch out effect
 
