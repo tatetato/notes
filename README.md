@@ -1,5 +1,8 @@
 # notes
 
+https://dribbble.com/shots/16478550-Whisper-of-the-Heart-Website
+round dark border
+
 https://dribbble.com/shots/18477642-UI-Anime-Website-Design
 card like border/frame, shadow effect
 
